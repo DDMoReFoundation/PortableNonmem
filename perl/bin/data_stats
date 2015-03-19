@@ -1,0 +1,161 @@
+#!perl.exe
+use FindBin qw($Bin);
+use lib "$Bin/../site/lib/PsN_4_3_1";
+# the above was entered by psnGlobalToLocalPaths
+
+use PsN;
+use data;
+use strict;
+use Getopt::Long;
+
+my ($opt_help,
+    $opt_long_help,
+    $opt_columns,
+    $opt_ignore_columns,
+	$opt_ignoresign);
+
+my $opts = { "h|?"                => \$opt_help,
+	     "help"               => \$opt_long_help,
+	     "columns:s"          => \$opt_columns,
+	     "ignore_columns:s"   => \$opt_ignore_columns,
+	     "ignoresign:s"   => \$opt_ignoresign,
+};
+
+my $res = GetOptions( %{$opts} );
+
+exit unless $res;
+
+if ( scalar( @ARGV ) < 1 and !($opt_help or $opt_long_help) ){
+  print "At least one list file must be specified. Use 'data_stats -h' for help.\n";
+  exit;
+}
+
+
+if($opt_help or $opt_long_help) {
+  print <<'ENDHELP';
+
+  data_stats
+
+  Usage:
+
+  data_stats [ -h | -? ] [ -help ]
+             [ -columns='string' ]
+	     [ -ignore_columns='string' ]
+	     [ -ignoresign='string' ]
+	     outputfile(s)
+
+ENDHELP
+
+  if( $opt_long_help and !$opt_help ){ 
+
+    print <<'ENDHELP';
+  Description:
+
+    data_stats calculates and prints simple statistics for data
+    files. Simple stastics are max, min, mean, median, range and
+    standard deviation for each column.
+
+  Examples:
+    
+    Calculate statistics for all columns in file.dta
+    
+    $ data_stats file.dta
+
+    Calculate statistics for all columns except WGT and AGE.
+    
+    $ data_stats --ignore_columns=WGT,AGE
+
+    Calculate statistics for WGT and AGE only
+
+    $ data_stats --columns=WGT,AGE
+
+  Options:
+
+    The options are given here in their long form. Any option may be
+    abbreviated to any nonconflicting prefix. The -threads option may
+    be abbreviated to -t(or even -thr).
+
+    The following options are valid:
+
+    -h | -?
+
+    Print a list of options.
+
+
+    -columns='strings'
+
+    By default data_stats prints statistics for all columns of the
+    data set. But if you give a comma separated list of column headers
+    or column numbers with the -columns option, then data_stats will
+    print statistics for those columns only.
+
+    
+    -ignore_columns='strings'
+
+    ignore_columns work the oposite way of -columns, it lets you
+    select column headers or column numbers for which data_stats
+    should not print statistcs. It also takes a comma separated list.
+
+    -ignoresign='string'
+
+    If the data file contains a header then that lines needs to be ignored by setting ignoresign.
+	Default is '@', i.e. ignore letters A-Z a-z.
+
+    -help
+
+    Print this, longer, help message.
+
+
+
+ENDHELP
+  }
+  exit;
+}
+
+my $ignoresign='@';
+if( $opt_ignoresign ){
+	$ignoresign = $opt_ignoresign;
+}
+
+my $datafile = $ARGV[0];
+my $dataobj = data -> new (filename => $datafile, ignoresign => $ignoresign, parse_header => 1);
+
+my %ignore_columns;
+
+if( $opt_ignore_columns ){
+  foreach my $ign ( split( /,/ , $opt_ignore_columns ) ){
+    $ignore_columns{$ign} = 1;
+  }
+}
+
+my @columns;
+
+if( $opt_columns ) {
+  @columns = split( /,/, $opt_columns)
+} else {
+  @columns = @{$dataobj -> header};
+}
+
+my $first = 1;
+foreach my $function ( ' 'x8, 'Min', 'Max', 'Mean', 'Median', 'Range', 'SD', ){
+  printf "%-8s", $function;
+  foreach my $head ( @columns ){
+    unless( $ignore_columns{$head} ){
+      if( $first ){
+	printf "%-8s", $head;
+      } else {
+	my $function = lc( $function );
+	if( $head =~ /[^\d]/ ){
+	  printf "%-8d", $dataobj -> $function( column_head => $head );
+	} else {
+	  printf "%-8d", $dataobj -> $function( column => $head );
+	}
+      }
+    }
+  }
+  $first = 0;
+  print "\n";
+}
+
+
+print "\n";

@@ -1,0 +1,124 @@
+<html lang="en">
+<head>
+<title>Fortran 2003 status - The GNU Fortran Compiler</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="The GNU Fortran Compiler">
+<meta name="generator" content="makeinfo 4.11">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Fortran-2003-and-2008-status.html#Fortran-2003-and-2008-status" title="Fortran 2003 and 2008 status">
+<link rel="next" href="Fortran-2008-status.html#Fortran-2008-status" title="Fortran 2008 status">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being ``Funding Free Software'', the Front-Cover
+Texts being (a) (see below), and with the Back-Cover Texts being (b)
+(see below).  A copy of the license is included in the section entitled
+``GNU Free Documentation License''.
+
+(a) The FSF's Front-Cover Text is:
+
+     A GNU Manual
+
+(b) The FSF's Back-Cover Text is:
+
+     You have freedom to copy and modify this GNU Manual, like GNU
+     software.  Copies published by the Free Software Foundation raise
+     funds for GNU development.-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Fortran-2003-status"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="Fortran-2008-status.html#Fortran-2008-status">Fortran 2008 status</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Fortran-2003-and-2008-status.html#Fortran-2003-and-2008-status">Fortran 2003 and 2008 status</a>
+<hr>
+</div>
+
+<h3 class="section">4.1 Fortran 2003 status</h3>
+
+<p>GNU Fortran supports several Fortran 2003 features; an incomplete
+list can be found below.  See also the
+<a href="http://gcc.gnu.org/wiki/Fortran2003">wiki page</a> about Fortran 2003.
+
+     <ul>
+<li>Intrinsics <code>command_argument_count</code>, <code>get_command</code>,
+<code>get_command_argument</code>, <code>get_environment_variable</code>, and
+<code>move_alloc</code>.
+
+     <li><a name="index-array_002c-constructors-268"></a><a name="index-g_t_0040code_007b_005b_002e_002e_002e_005d_007d-269"></a>Array constructors using square brackets. That is, <code>[...]</code> rather
+than <code>(/.../)</code>.  Type-specification for array constructors like
+<code>(/ some-type :: ... /)</code>.
+
+     <li><a name="index-g_t_0040code_007bFLUSH_007d-statement-270"></a><a name="index-statement_002c-_0040code_007bFLUSH_007d-271"></a><code>FLUSH</code> statement.
+
+     <li><a name="index-g_t_0040code_007bIOMSG_003d_007d-specifier-272"></a><code>IOMSG=</code> specifier for I/O statements.
+
+     <li><a name="index-g_t_0040code_007bENUM_007d-statement-273"></a><a name="index-g_t_0040code_007bENUMERATOR_007d-statement-274"></a><a name="index-statement_002c-_0040code_007bENUM_007d-275"></a><a name="index-statement_002c-_0040code_007bENUMERATOR_007d-276"></a><a name="index-g_t_0040code_007bfshort_002denums_007d-277"></a>Support for the declaration of enumeration constants via the
+<code>ENUM</code> and <code>ENUMERATOR</code> statements.  Interoperability with
+<samp><span class="command">gcc</span></samp> is guaranteed also for the case where the
+<samp><span class="command">-fshort-enums</span></samp> command line option is given.
+
+     <li><a name="index-TR-15581-278"></a>TR 15581:
+          <ul>
+<li><a name="index-g_t_0040code_007bALLOCATABLE_007d-dummy-arguments-279"></a><code>ALLOCATABLE</code> dummy arguments. 
+<li><a name="index-g_t_0040code_007bALLOCATABLE_007d-function-results-280"></a><code>ALLOCATABLE</code> function results
+<li><a name="index-g_t_0040code_007bALLOCATABLE_007d-components-of-derived-types-281"></a><code>ALLOCATABLE</code> components of derived types
+</ul>
+
+     <li><a name="index-g_t_0040code_007bALLOCATE_007d-282"></a>The <code>ERRMSG=</code> tag is now supported in <code>ALLOCATE</code> and
+<code>DEALLOCATE</code> statements.  The <code>SOURCE=</code> tag is supported
+in an <code>ALLOCATE</code> statement.  An <em>intrinsic-type-spec</em>
+can be used as the <em>type-spec</em> in an <code>ALLOCATE</code> statement;
+while the use of a <em>derived-type-name</em> is currently unsupported.
+
+     <li><a name="index-g_t_0040code_007bSTREAM_007d-I_002fO-283"></a><a name="index-g_t_0040code_007bACCESS_003d_0027STREAM_0027_007d-I_002fO-284"></a>The <code>OPEN</code> statement supports the <code>ACCESS='STREAM'</code> specifier,
+allowing I/O without any record structure.
+
+     <li>Namelist input/output for internal files.
+
+     <li><a name="index-g_t_0040code_007bPROTECTED_007d-statement-285"></a><a name="index-statement_002c-_0040code_007bPROTECTED_007d-286"></a>The <code>PROTECTED</code> statement and attribute.
+
+     <li><a name="index-g_t_0040code_007bVALUE_007d-statement-287"></a><a name="index-statement_002c-_0040code_007bVALUE_007d-288"></a>The <code>VALUE</code> statement and attribute.
+
+     <li><a name="index-g_t_0040code_007bVOLATILE_007d-statement-289"></a><a name="index-statement_002c-_0040code_007bVOLATILE_007d-290"></a>The <code>VOLATILE</code> statement and attribute.
+
+     <li><a name="index-g_t_0040code_007bIMPORT_007d-statement-291"></a><a name="index-statement_002c-_0040code_007bIMPORT_007d-292"></a>The <code>IMPORT</code> statement, allowing to import
+host-associated derived types.
+
+     <li><a name="index-g_t_0040code_007bUSE_002c-INTRINSIC_007d-statement-293"></a><a name="index-statement_002c-_0040code_007bUSE_002c-INTRINSIC_007d-294"></a><a name="index-g_t_0040code_007bISO_005fFORTRAN_005fENV_007d-statement-295"></a><a name="index-statement_002c-_0040code_007bISO_005fFORTRAN_005fENV_007d-296"></a><code>USE</code> statement with <code>INTRINSIC</code> and <code>NON_INTRINSIC</code>
+attribute; supported intrinsic modules: <code>ISO_FORTRAN_ENV</code>,
+<code>OMP_LIB</code> and <code>OMP_LIB_KINDS</code>.
+
+     <li>Renaming of operators in the <code>USE</code> statement.
+
+     <li><a name="index-ISO-C-Bindings-297"></a>Interoperability with C (ISO C Bindings)
+
+     <li>BOZ as argument of <code>INT</code>, <code>REAL</code>, <code>DBLE</code> and <code>CMPLX</code>.
+
+     <li><a name="index-type_002dbound-procedure-298"></a><a name="index-type_002dbound-operator-299"></a>Type-bound procedures with <code>PROCEDURE</code> or <code>GENERIC</code>, and operators
+bound to a derived-type.
+
+     <li><a name="index-g_t_0040code_007bEXTENDS_007d-300"></a><a name="index-derived_002dtype-extension-301"></a>Extension of derived-types (the <code>EXTENDS(...)</code> syntax).
+
+     <li><a name="index-g_t_0040code_007bABSTRACT_007d-type-302"></a><a name="index-g_t_0040code_007bDEFERRED_007d-procedure-binding-303"></a><code>ABSTRACT</code> derived-types and declaring procedure bindings <code>DEFERRED</code>.
+
+   </ul>
+
+   </body></html>
+
