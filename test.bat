@@ -6,7 +6,7 @@ set home=%~dp0
 
 CALL %home%\config.bat
 
-CALL %home%\setup-NONMEM.bat %NM_INSTALL_DIR_NAME%
+CALL %home%\setup-NONMEM.bat
 
 mkdir TEST
 

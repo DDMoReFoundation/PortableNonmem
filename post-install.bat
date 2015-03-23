@@ -7,22 +7,27 @@
 
 set home=%~dp0
 
-CALL %home%\config.bat
+call %home%\config.bat
 
-COPY %home%\nmhelp.bat %home%\%NM_INSTALL_DIR_NAME%\nmhelp.bat.orig
+copy %home%\nmhelp.bat %home%\%NM_INSTALL_DIR_NAME%\nmhelp.bat.orig
 if %ERRORLEVEL% NEQ 0 (
-    echo "Failure: Could not copy nmhelp.bat script"
-    exit 1
+    set error_msg="Could not copy nmhelp.bat script"
+	goto fail
 )
 
-COPY %home%\%NM_INSTALL_DIR_NAME%\run\%NMFE_BIN% %home%\%NM_INSTALL_DIR_NAME%\run\%NMFE_BIN%.orig
+copy %home%\%NM_INSTALL_DIR_NAME%\run\%NMFE_BIN% %home%\%NM_INSTALL_DIR_NAME%\run\%NMFE_BIN%.orig
 if %ERRORLEVEL% NEQ 0 (
-    echo "Failure: Could not archive the %NMFE_BIN% file"
-    exit 1
+    set error_msg="Could not archive the %NMFE_BIN% file"
+	goto fail
 )
 
+:success
+	echo "Success"
+	echo "Now run test.bat"
+	goto end
 
-echo "Success"
-
-
-echo "Now run test.bat"
+:fail
+	echo "Failure"
+    echo %error_msg% 
+	set ERRORLEVEL=1
+:end

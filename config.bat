@@ -2,6 +2,10 @@
 ::
 :: Installer configuration
 
+:: Avoiding bogus failures due to some previous script failing
+@echo off
+set ERRORLEVEL=0
+
 @echo on
 :: Update these properties accordingly to the version of NONMEM that you install
 :: Name of the Nonmem install CD directory
@@ -13,4 +17,6 @@ set NMFE_BIN="nmfe73.bat"
 
 :: location of the target SEE bundle directory
 set SEE_BUNDLE_DIR=%home%\NONMEM_SEE
+
+@echo off
 

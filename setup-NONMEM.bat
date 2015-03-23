@@ -6,7 +6,7 @@
 @echo off
 
 set home=%~dp0
-set nm_install_dir=%1
+set nm_install_dir="nm_7.3.0_g"
 
 CALL %home%\setup-perl.bat
 
