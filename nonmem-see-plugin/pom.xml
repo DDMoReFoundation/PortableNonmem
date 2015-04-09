@@ -36,15 +36,6 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>jenkins</id>
-            <properties>
-                <standalone.nonmem.installation.location>scp://filestore/mangowork/DDMoRe/SEE/Product4/see-plugins/sources/portable-nonmem</standalone.nonmem.installation.location>
-            </properties>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
             <plugin>
