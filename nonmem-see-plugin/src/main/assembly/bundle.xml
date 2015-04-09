@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly
+    xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>bundle</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <!-- To improve reusability of the scripts and reduce duplication, we grab resources from outside the Maven module project files -->
+	
+        <dependencySets>
+            <dependencySet>
+                <includes>
+                    <include>com.mango:windows-nonmem:*</include>
+                </includes>
+                <useProjectArtifact>false</useProjectArtifact>
+                <useStrictFiltering>true</useStrictFiltering>
+                <unpack>false</unpack>
+                <useTransitiveFiltering>true</useTransitiveFiltering>
+                <outputDirectory>mif-exec/connectors</outputDirectory>
+                <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+            </dependencySet>
+            <dependencySet>
+                <includes>
+                    <include>eu.ddmore:converter-nonmem:*</include>
+                </includes>
+                <useProjectArtifact>false</useProjectArtifact>
+                <useStrictFiltering>true</useStrictFiltering>
+                <unpack>false</unpack>
+                <useTransitiveFiltering>true</useTransitiveFiltering>
+                <outputDirectory>converter-toolbox-distribution/lib</outputDirectory>
+            </dependencySet>
+        </dependencySets>
+        
+    <fileSets>
+	
+        <fileSet>
+            <directory>../gfortran</directory>
+            <outputDirectory>gfortran</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../perl</directory>
+            <outputDirectory>perl</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/${standalone.nonmem.installation.dir.name}</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>LICENSE</include>
+                <include>setup-fortran-compiler.bat</include>
+                <include>setup-NONMEM.bat</include>
+                <include>setup-NONMEM.pl</include>
+                <include>setup-perl.bat</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/runtime/</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>*</include>
+            </includes>
+            <filtered>true</filtered>
+        </fileSet>
+	</fileSets>
+</assembly>

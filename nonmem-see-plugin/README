@@ -1,0 +1,13 @@
+Standalone Execution Environment Installation Tool Builder
+=============================================
+This Maven module is responsible for assembling an see-installer tool.
+
+Provider:  [ Mango Solutions ](http://www.mango-solutions.com "data analysis that delivers")
+
+
+Description
+---------------------------------------------
+Maven module responsible for building up NONMEM SEE Plugin containing:
+* Standalone NONMEM installation
+* NM-TRAN converter
+* windows-nonmem MIF connector

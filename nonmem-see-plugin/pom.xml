@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>eu.ddmore</groupId>
+    <artifactId>nonmem-see-plugin</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>SEE NONMEM Plugin</name>
+    <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <skip.assembly>false</skip.assembly>
+        <!-- default location from where Standalone NONMEM SEE is to be obtained -->
+        <standalone.nonmem.installation.location>file://${project.build.directory}/../../</standalone.nonmem.installation.location>
+        <standalone.nonmem.installation.dir.name>nonmem_install</standalone.nonmem.installation.dir.name>
+        <standalone.nonmem.installation.archive.name>nm_7.3.0_g.zip</standalone.nonmem.installation.archive.name>
+        <perl.version>5.20.1.1</perl.version>
+        <nonmem.version>7.3.0</nonmem.version>
+        <gfortran.version>4.6.0 20100620 (experimental)</gfortran.version>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp><!-- workaround 
+            for http://jira.codehaus.org/browse/MRESOURCES-99 -->
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>eu.ddmore</groupId>
+            <artifactId>converter-nonmem</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mango</groupId>
+            <artifactId>windows-nonmem</artifactId>
+            <version>3.0.17-ddmore-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>jenkins</id>
+            <properties>
+                <standalone.nonmem.installation.location>scp://filestore/mangowork/DDMoRe/SEE/Product4/see-plugins/sources/portable-nonmem</standalone.nonmem.installation.location>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-binary-NONMEM</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>download-single</goal>
+                        </goals>
+                        <configuration>
+                            <url>${standalone.nonmem.installation.location}</url>
+                            <fromFile>${standalone.nonmem.installation.archive.name}</fromFile>
+                            <toDir>${project.build.directory}</toDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>unzip-downloaded-binary-NONMEM</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <echo
+                                    message="Unzipping ${standalone.nonmem.installation.archive.name}" />
+                                <unzip
+                                    src="${project.build.directory}/${standalone.nonmem.installation.archive.name}"
+                                    dest="${project.build.directory}/${standalone.nonmem.installation.dir.name}" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>${basedir}/src/main/assembly/bundle.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                        <id>make-exec</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <extensions>
+            <extension>
+                <!-- To enable scp for wagon-maven-plugin -->
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>1.0</version>
+            </extension>
+        </extensions>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>wagon-maven-plugin</artifactId>
+                    <version>1.0-beta-5</version>
+                    <configuration>
+                        <serverId>filestore</serverId> <!-- This can be used to provide authentication information in your local 
+                            Maven settings.xml file if required -->
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <url>http://ddmore.eu</url>
+    <description>This is SEE plugin providing Nonmem support.</description>
+    <organization>
+        <name>Mango Solutions</name>
+        <url>http://www.mango-solutions.com</url>
+    </organization>
+    <inceptionYear>2015</inceptionYear>
+
+    <scm>
+        <url>http://sourceforge.net/p/ddmore/PORTABLE.NONMEM/ci/master/tree/</url>
+        <connection>scm:git:git://git.code.sf.net/p/ddmore/PORTABLE.NONMEM</connection>
+        <developerConnection>scm:git:ssh://git.code.sf.net/p/ddmore/PORTABLE.NONMEM</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+</project>

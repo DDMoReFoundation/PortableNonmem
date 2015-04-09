@@ -24,9 +24,9 @@ There are the following files in the project:
 * nmhelp.bat - a script that ensures that starts up nonmem help system from command line
 * install.bat - executes NONMEM installer
 * post-install.bat - a script that post-processes NONMEM installation and prepares it for SEE packaging
-* create-SEE-bundle.bat - a script that packages SEE bundle
 * gfortran - gfortran installation
 * perl - perl installation
+* nonmem-see-plugin - Maven module producing SEE Plugin
 
 
 
@@ -58,18 +58,20 @@ To create portable NONMEM installation:
 
 SEE Bundle Packaging
 ---------------------------------------------
-* Run create-SEE-bundle.bat
-* The resulting SEE bundle durectory name will be "NONMEM_SEE"
-* zip the "NONMEM_SEE" bundle and publish
+* Build portable nonmem installation (see above)
+* Create a zip archive of the produced nonmem installation directory (e.g. 'nm_7.3.0_g')
+* Go to nonmem-see-plugin
+* Run 'mvn clean verify' 
+	Note: at the time of writting the build by defaul will look for '<NM_INSTALLER_HOME>/nm_7.3.0_g.zip', you can change the file name by passing '-Dstandalone.nonmem.installation.archive.name=<archive_file_name.zip>' to Maven command
+* the resulting nonmem-see-plugin bundle will be in '<NM_INSTALLER_HOME>/nonmem-see-plugin/target'
 
 
 SEE Bundle Verification
 ---------------------------------------------
-* Copy test.bat to the SEE bundle directory
+* unzip nonmem-see-plugin*.zip from 'target' directory (see section above)
+* Copy '<NM_INSTALLER_HOME>/test.bat' to where you unzipped NONMEM SEE bundle
 * Copy nonmem.license to Nonmem installation in SEE bundle directory
 * go to SEE bundle directory and run test.bat
 * verify that the execution was successful.
-* remove nonmem.lic file from SEE bundle NONMEM license directory 
-* remove TEST directory and test.bat file from SEE bundle directory
 
 
