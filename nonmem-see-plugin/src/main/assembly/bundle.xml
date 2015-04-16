@@ -12,13 +12,14 @@
 	
         <dependencySets>
             <dependencySet>
+                <!-- if you need to turn on 'useTransitiveFiltering' in here make sure that you exclude MIF and its dependencies
+                if not, the bundle will contain all of them not just the direct dependencies of windows-nonmem connector -->
                 <includes>
                     <include>com.mango:windows-nonmem:*</include>
                 </includes>
                 <useProjectArtifact>false</useProjectArtifact>
                 <useStrictFiltering>true</useStrictFiltering>
                 <unpack>false</unpack>
-                <useTransitiveFiltering>true</useTransitiveFiltering>
                 <outputDirectory>mif-exec/connectors</outputDirectory>
                 <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
             </dependencySet>
