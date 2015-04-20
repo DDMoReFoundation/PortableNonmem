@@ -58,11 +58,11 @@ To create portable NONMEM installation:
 
 SEE Bundle Packaging
 ---------------------------------------------
-* Build portable nonmem installation (see above)
-* Create a zip archive of the produced nonmem installation directory (e.g. 'nm_7.3.0_g')
+* Build portable NONMEM installation (see above)
+* Create a zip archive of the produced NONMEM installation directory (e.g. 'nm_7.3.0_g')
 * Go to nonmem-see-plugin
 * Run 'mvn clean verify' 
-	Note: at the time of writting the build by defaul will look for '<NM_INSTALLER_HOME>/nm_7.3.0_g.zip', you can change the file name by passing '-Dstandalone.nonmem.installation.archive.name=<archive_file_name.zip>' to Maven command
+	Note: at the time of writing the build by default will look for '<NM_INSTALLER_HOME>/nm_7.3.0_g.zip', you can change the file name by passing '-Dstandalone.nonmem.installation.archive.name=<archive_file_name.zip>' to Maven command
 * the resulting nonmem-see-plugin bundle will be in '<NM_INSTALLER_HOME>/nonmem-see-plugin/target'
 
 
@@ -70,7 +70,7 @@ SEE Bundle Verification
 ---------------------------------------------
 * unzip nonmem-see-plugin*.zip from 'target' directory (see section above)
 * Copy '<NM_INSTALLER_HOME>/test.bat' to where you unzipped NONMEM SEE bundle
-* Copy nonmem.license to Nonmem installation in SEE bundle directory
+* Copy nonmem.license to NONMEM installation in SEE bundle directory
 * go to SEE bundle directory and run test.bat
 * verify that the execution was successful.
 
