@@ -21,7 +21,7 @@ There are the following files in the project:
 * setup-perl.bat - environment setup script for perl
 * setup-fortran-compiler.bat - environment setup script for fortran compiler
 * test.bat - tests NONMEM installation
-* nmhelp.bat - a script that ensures that starts up nonmem help system from command line
+* nmhelp.bat - a script that starts up NONMEM help system from command line
 * install.bat - executes NONMEM installer
 * post-install.bat - a script that post-processes NONMEM installation and prepares it for SEE packaging
 * gfortran - gfortran installation
@@ -36,7 +36,7 @@ To create portable NONMEM installation:
 
 * Obtain NONMEM CD Archive (e.g. from ICT or from official FTP)
 * Unzip NONMEM CD Archive into NM_INSTALLER_HOME
-* Copy nonmem license into NM_INSTALLER_HOME.
+* Obtain valid NONMEM license and copy it into NM_INSTALLER_HOME (this license will just be used for installation process, the resulting binary won't include it)
 * Update NM_INSTALLER_HOME\config.bat as per version of NONMEM that you are installing
 * Update NM_INSTALLER_HOME\setup-NONMEM.bat as per version of  (e.g. set NONMEM installation directory name)
 * Open command prompt (Start Menu->'cmd.exe' [enter])

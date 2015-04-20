@@ -32,3 +32,10 @@ NONMEM_SEE
 TEST
 
 
+######################
+# Eclipse files
+######################
+.project
+.settings/
+
+
