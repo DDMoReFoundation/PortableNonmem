@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.ddmore</groupId>
     <artifactId>nonmem-see-plugin</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-052015-SNAPSHOT</version>
     <name>SEE NONMEM Plugin</name>
     <packaging>pom</packaging>
     <properties>
