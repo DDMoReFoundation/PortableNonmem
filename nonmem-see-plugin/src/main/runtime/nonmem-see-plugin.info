@@ -1,0 +1,32 @@
+Portable NONMEM for SEE
+=============================================
+This is a portable NONMEM packaging project that produces SEE platform bundle.
+
+Provider:  [ Mango Solutions ](http://www.mango-solutions.com "data analysis that delivers")
+
+Some scripts are based on PKPDStick_72 developed by (c) Andrew C. Hooker 2014
+
+
+Installation Guide
+---------------------------------------------
+To create portable NONMEM installation:
+
+* Unzip the contents of this archive into root directory of SEE installation
+
+
+Contents
+---------------------------------------------
+* Perl ${perl.version}
+* Nonmem ${nonmem.version}
+* gfortran ${gfortran.version}
+
+
+Plugin Build Meta Data
+---------------------------------------------
+* Plugin-Provider: Mango Solutions
+* Plugin-Version: **${project.version}**
+* Build-Number: **${env.BUILD_NUMBER}**
+* Build-Date: **${build.timestamp}**
+* Build-OS: **${os.name} - ${os.version}**
+* Built-By: **${user.name}**
+
