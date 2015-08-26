@@ -21,6 +21,8 @@
         <gfortran.version>4.6.0 20100620 (experimental)</gfortran.version>
         <build.timestamp>${maven.build.timestamp}</build.timestamp><!-- workaround 
             for http://jira.codehaus.org/browse/MRESOURCES-99 -->
+        <!-- URL of Maven repository where the artifacts should be deployed to -->
+        <distributionManagement.repository.url></distributionManagement.repository.url>
     </properties>
     <dependencies>
         <dependency>
@@ -134,4 +136,14 @@
         <developerConnection>scm:git:ssh://git.code.sf.net/p/ddmore/PORTABLE.NONMEM</developerConnection>
         <tag>HEAD</tag>
     </scm>
+    
+    <distributionManagement>
+        <repository>
+            <id>mango-ddmore-external</id>
+            <name>Mango DDMoRe External Repository</name>
+            <url>${distributionManagement.repository.url}</url>
+            <!-- uniqueVersion=false is not supported since Maven 3
+            leaving this comment in here since deploy-maven-plugin documentation doesn't state this -->
+        </repository>
+    </distributionManagement>
 </project>
