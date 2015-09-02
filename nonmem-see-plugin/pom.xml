@@ -21,7 +21,8 @@
         <gfortran.version>4.6.0 20100620 (experimental)</gfortran.version>
         <build.timestamp>${maven.build.timestamp}</build.timestamp><!-- workaround 
             for http://jira.codehaus.org/browse/MRESOURCES-99 -->
-        <!-- URL of Maven repository where the artifacts should be deployed to -->
+        <!-- URL of Maven repository where the artifacts should be deployed to.
+        The actual value should be set by the command-line parameter, since this value points to internal host.-->
         <distributionManagement.repository.url></distributionManagement.repository.url>
     </properties>
     <dependencies>
