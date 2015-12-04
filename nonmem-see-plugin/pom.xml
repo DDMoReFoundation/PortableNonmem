@@ -89,6 +89,7 @@
                         <configuration>
                             <descriptors>
                                 <descriptor>${basedir}/src/main/assembly/bundle.xml</descriptor>
+                                <descriptor>${basedir}/src/main/assembly/bundle-with-nonmem.xml</descriptor>
                             </descriptors>
                         </configuration>
                         <id>make-exec</id>
