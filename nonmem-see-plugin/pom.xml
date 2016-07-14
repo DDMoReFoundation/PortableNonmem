@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.ddmore</groupId>
     <artifactId>nonmem-see-plugin</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.0</version>
     <name>SEE NONMEM Plugin</name>
     <packaging>pom</packaging>
     <properties>
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>eu.ddmore</groupId>
             <artifactId>converter-nonmem</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
+            <version>0.4.0</version>
         </dependency>
         <dependency>
             <groupId>com.mango</groupId>
