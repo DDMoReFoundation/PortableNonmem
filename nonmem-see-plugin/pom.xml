@@ -128,6 +128,13 @@
         <url>http://www.mango-solutions.com</url>
     </organization>
     <inceptionYear>2015</inceptionYear>
+    <licenses>
+      <license>
+        <name>GNU Affero General Public License</name>
+        <url>https://www.gnu.org/licenses/agpl-3.0.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
 
     <scm>
         <url>http://sourceforge.net/p/ddmore/PORTABLE.NONMEM/ci/master/tree/</url>
