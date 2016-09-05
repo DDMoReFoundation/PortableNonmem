@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.mango</groupId>
             <artifactId>windows-nonmem</artifactId>
-            <version>3.0.19-ddmore-SNAPSHOT</version>
+            <version>3.0.19-ddmore</version>
             <type>jar</type>
         </dependency>
     </dependencies>
